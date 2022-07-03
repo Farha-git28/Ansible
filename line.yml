@@ -1,0 +1,12 @@
+- name: roles for webserver and webapp
+  hosts: all
+  tasks:
+
+  - name: replace line
+    lineinfile:  
+      dest: /home/ec2-user/txt123
+      regexp: '^(.*)Inserting a line in a file.(.*)$' 
+      line: "hello world"  
+      state: present  
+      backrefs: yes
+      create: True

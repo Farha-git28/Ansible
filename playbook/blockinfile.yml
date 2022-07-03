@@ -1,0 +1,13 @@
+- name: blockinfile module
+  hosts: all
+  become: yes
+  tasks: 
+    - name: block in file
+      blockinfile:
+        path: /etc/httpd/xyz.conf
+        block: |
+          <virtualhost*:80>
+          servername localhost
+          serveralias www.localhost.com
+          documentroot /var/www/html
+          </virtualhost>

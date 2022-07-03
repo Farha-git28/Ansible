@@ -1,0 +1,10 @@
+tomcat_url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.64/bin/apache-tomcat-9.0.64.tar.gz
+tomcat_url_split: "{{tomcat_url.split('/') | last}}"
+tomcat_dir: "/opt/{{tomcat_url_split | regex_replace ('.tar.gz',)}}"
+
+
+
+USERNAME: root
+PASSWORD: root123
+DB_CONNECTOR: localhost
+DATABASE: student

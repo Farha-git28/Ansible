@@ -1,0 +1,10 @@
+- name: ignore_error
+  hosts: all
+  tasks: 
+    - name: igmore_error
+      shell: ps -aux | grep java | grep -v java
+      ignore_errors: yes
+
+    - name: run the process
+      debug:
+        msg: Run the process.

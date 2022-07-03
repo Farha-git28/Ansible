@@ -1,0 +1,13 @@
+- name: package installation
+  hosts: all
+  become: yes
+  tasks: 
+    - name: install httpd
+      yum:
+        state: present
+        name: "{{item}}"
+      loop:
+       - wget
+       - java 
+       - vim
+       - curl

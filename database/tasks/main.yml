@@ -1,0 +1,97 @@
+- name: download database packges
+  package:
+    name: "{{item}}"
+    state: present
+  loop: 
+    - mysql
+    - MySQL-python
+    - mariadb-server
+
+- name: start mariadb
+  service: 
+    name: mariadb
+    state: started
+    enabled: true
+
+
+- name: copy .my.cnf file with root password credentials
+  template: 
+    src: my.cnf 
+    dest: /root/.my.cnf
+
+- name: Create a new database with name "myFirstDB"  
+  mysql_db: 
+    name: student
+    state: present  
+
+- name: Create user in database with name "admin"  
+  mysql_user: 
+    name: root
+    password: root123
+    priv: '*.*:ALL'  
+    state: present  
+       
+
+- name: add sample data to database  
+  template: 
+    src: dump.sql 
+    dest: /tmp/dump.sql/ 
+
+- name: insert sample data into database  
+  mysql_db: 
+    name: student
+    state: import 
+    target: /tmp/dump.sql/dump.sql
+
+- name: Stop tomcat
+  command: "{{tomcat_dir}}/bin/shutdown.sh" 
+
+- name: reStart tomcat
+  shell: nohup /opt/apache-tomcat-9.0.64/bin/catalina.sh start
+
+
+
+
+# - name:  download sources
+#   get_url: 
+#     url: https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+#     dest: /opt
+
+# - name: install package
+#   yum:
+#     name: /opt/mysql80-community-release-el7-3.noarch.rpm
+#     state: present
+
+# - name: install gpf
+#   rpm_key:
+#     state: present
+#     key: https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+
+# # - name: install Mysql
+# #   yum: 
+# #     name: mysql-server
+# #     state: present
+
+# - name: Install MySQL
+#   yum: 
+#     name: mysql-server 
+#     state: present
+
+
+
+
+
+
+
+# - name: Start the Mariadb service
+#   become: yes
+#   service: 
+#     name: mariadb
+#     state: started
+#     enabled: yes
+
+# - name: create databases
+#   mysql_db: 
+#     name: student
+#     state: present
+

@@ -1,0 +1,12 @@
+- name: playbook for tag
+  hosts: all
+  tasks: 
+    - name: tasks for server
+      debug:
+        msg: server is running
+      tags: server
+
+    - name: tasks for apps
+      debug:
+        msg: apps is running
+      tags: apps
