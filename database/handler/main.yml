@@ -1,4 +1,1 @@
-- name: mariadb
-  service: 
-    name: mariadb
-    state: restarted
+
