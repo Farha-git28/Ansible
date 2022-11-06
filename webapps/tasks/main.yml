@@ -9,12 +9,12 @@
 - name: download tomcat
   unarchive:
     src: "{{tomcat_url}}"
-    dest: "{{tomcat_dir}}"
+    dest: "{{tomcat_dir1}}"
     remote_src: True
 
 - name: copy war file
   get_url:
-    url: https://student-app-war-docker.s3.ap-south-1.amazonaws.com/studentapp-2.2-SNAPSHOT.war
+    url:  https://studentwar-new.s3.ap-south-1.amazonaws.com/studentapp-2.2-SNAPSHOT.war
     dest: "{{tomcat_dir}}/webapps"
 
 
@@ -24,7 +24,7 @@
   
 - name: copy jar file 
   get_url:
-    url: https://student-appnew.s3.ap-south-1.amazonaws.com/mysql-connector.jar
+    url: https://studentwar-new.s3.ap-south-1.amazonaws.com/mysql-connector.jar
     dest: "{{tomcat_dir}}/lib/"
 
 - name: copy context.xml
